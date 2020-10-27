@@ -1,6 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
-import { Link } from 'react-router-dom';
+import { 
+  BrowserRouter as Router, 
+  Link, 
+  Switch, 
+  Route
+} from 'react-router-dom';
+import GamesPage from './components/GamesPage';
 
 function App() {
   return (
@@ -10,7 +16,15 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <Link to="games">Games</Link>
+        <Router>
+          <Link to="/games">Games</Link>
+        
+          <Switch>
+            <Route path="/games">
+              <GamesPage/>
+            </Route>
+          </Switch>
+        </Router>
       </header>
     </div>
   );
