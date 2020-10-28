@@ -1,31 +1,32 @@
-import logo from './logo.svg';
 import './App.css';
 import { 
   BrowserRouter as Router, 
   Link, 
   Switch, 
-  Route
+  Route,
+  NavLink
 } from 'react-router-dom';
 import GamesPage from './components/GamesPage';
+import GamesForm from './components/GamesForm';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <Router>
-          <Link to="/games">Games</Link>
-        
+    <div className="ui container">
+      <Router>
+        <div className="ui three item menu">
+          <NavLink className="item" activeClassName={"active"}  to="/home">Home</NavLink>
+          <NavLink className="item" activeClassName={"active"}  to="/games">Games</NavLink>
+          <NavLink className="item" activeClassName={"active"}  to="/games/new">Add Game</NavLink>
+        </div>
           <Switch>
-            <Route path="/games">
+            <Route exact path="/games">
               <GamesPage/>
+            </Route>
+            <Route path="/games/new">
+              <GamesForm/>
             </Route>
           </Switch>
         </Router>
-      </header>
     </div>
   );
 }
