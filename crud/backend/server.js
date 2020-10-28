@@ -7,13 +7,20 @@ const dbName = 'crudwithredux';
 
 
 mongodb.MongoClient.connect(dbUrl,{useNewUrlParser: true, useUnifiedTopology: true} ,function(err, client){
-    if (err) throw err;
     const db = client.db(dbName);
     app.get('/api/games', (req,res) => {
         db.collection('games').find({}).toArray((err,games) => {
-            if(err) throw err;
             res.json({ games });
         });
     });
+
+    app.use((req, res) => {
+        res.status(404).json({
+            errors:{
+                global: "Still working on this shit!"
+            }
+        })
+    });
+    
     app.listen(8080, () => console.log('Sever is running on localhost:8080'));
 });
