@@ -18,9 +18,18 @@ function validate(data){
 mongodb.MongoClient.connect(dbUrl,{useNewUrlParser: true, useUnifiedTopology: true} ,function(err, client){
     const db = client.db(dbName);
     app.get('/api/games', (req,res) => {
-        db.collection('games').find({}).toArray((err,games) => {
-            res.json({ games });
-        });
+        setTimeout(
+            () => {
+                db.collection('games').find({}).toArray((err,games) => {
+                    res.json({ games });
+                });
+            }, 2000)
+    });
+
+    app.get('/api/games/:_id', (req,res) => {
+        db.collection('games').findOne({_id:new mongodb.ObjectId(req.paramas._id)}, (err, game) => {
+                res.json({game});
+            });
     });
 
     app.post('/games/api/games', (req, res) => {

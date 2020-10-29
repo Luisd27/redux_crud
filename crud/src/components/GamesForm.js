@@ -7,8 +7,9 @@ import { Redirect } from 'react-router-dom';
 
 class GamesForm extends Component {
     state = { 
-        title: '',
-        cover: '',
+        _id: this.props.game ? this.props.game._id : null,
+        title: this.props.game ? this.props.game.title : '',
+        cover: this.props.game ? this.props.game.cover : '',
         errors: {},
         loading: false,
         done: false
@@ -82,5 +83,16 @@ class GamesForm extends Component {
          );
     }
 }
+
+function mapStateToProps(state, props){
+    //console.log(props.match.params._id);
+    if(props.match.params._id){
+        return{
+            game: state.games.find(item => item._id === props.match.params._id)
+        }
+    }
+    return { game: null };
+    
+}
  
-export default connect(null, {saveGames})(GamesForm);
+export default connect(mapStateToProps, {saveGames})(GamesForm);

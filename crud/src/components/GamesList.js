@@ -9,7 +9,7 @@ export default function GamesList({ games }) {
     );
 
     const gamesList = (
-        <div className="io foour cards">
+        <div className="ui four cards">
                 {games.map(game => <GameCard game={game} key={game._id} /> ) }
         </div>
     );

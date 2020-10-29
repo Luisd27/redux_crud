@@ -25,6 +25,7 @@ function App() {
             <Route path="/games/new">
               <GamesForm/>
             </Route>
+            <Route path="/game/:_id" component={GamesForm}/>
           </Switch>
         </Router>
     </div>
